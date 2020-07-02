@@ -13,5 +13,3 @@ helm repo update
 helm upgrade --install --debug pihole-volumes ../pihole --namespace pihole
 
 helm upgrade --install pihole -f pihole.values.yml mojo2600/pihole --namespace=pihole
-
-#retrieve bearer token: kubectl -n kubernetes-dashboard describe secret admin-user-token | grep ^token
