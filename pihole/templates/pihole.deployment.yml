@@ -40,3 +40,7 @@ spec:
               secretKeyRef:
                 key: "password"
                 name: "pihole-secret"
+          - name: DNS1
+            value: 1.1.1.1
+          - name: DNS2
+            value: 1.0.0.1
