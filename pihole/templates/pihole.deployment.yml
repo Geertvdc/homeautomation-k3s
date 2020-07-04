@@ -44,3 +44,10 @@ spec:
             value: 1.1.1.1
           - name: DNS2
             value: 1.0.0.1
+        volumeMounts:
+          - name: pihole-data
+            mountPath: /etc/pihole/
+      volumes:
+      - name: pihole-data
+        persistentVolumeClaim:
+          claimName: pihole
