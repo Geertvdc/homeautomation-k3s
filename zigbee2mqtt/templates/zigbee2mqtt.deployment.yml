@@ -1,0 +1,36 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zigbee2mqtt
+  labels:
+    app: zigbee2mqtt
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: zigbee2mqtt
+  template:
+    metadata:
+      labels:
+        app: zigbee2mqtt
+    spec:
+      containers:
+      - name: zigbee2mqtt
+        image: koenkk/zigbee2mqtt:latest
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - name: ttyacm
+          mountPath: /dev/ttyACM0
+        - name: zigbee2mqtt-data
+          mountPath: /app/data
+      volumes:
+      - name: ttyacm
+        hostPath:
+          path: /dev/ttyACM0
+      - name: zigbee2mqtt-data
+        persistentVolumeClaim:
+          claimName: zigbee2mqtt
