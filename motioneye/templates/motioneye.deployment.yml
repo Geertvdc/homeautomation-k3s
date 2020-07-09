@@ -1,0 +1,37 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: motioneye
+  labels:
+    app: motioneye
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: motioneye
+  template:
+    metadata:
+      labels:
+        app: motioneye
+    spec:
+      containers:
+      - name: motioneye
+        image: ccrisan/motioneye:master-amd64
+        ports:
+          - containerPort: 8765
+            protocol: TCP
+        volumeMounts:
+          - name: motioneye-config
+            mountPath: /etc/motioneye/
+          - name: motioneye-videos
+            mountPath: /var/lib/motioneye
+      volumes:
+      - name: motioneye-config
+        persistentVolumeClaim:
+          claimName: motioneye-config
+      - name: motioneye-videos
+        persistentVolumeClaim:
+          claimName: motioneye-videos
