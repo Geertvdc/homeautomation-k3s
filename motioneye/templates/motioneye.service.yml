@@ -9,5 +9,8 @@ spec:
   ports:
     - port: 8765
       targetPort: 8765
-      protocol: TCP
+      name: web
+    - port: 7999
+      targetPort: 7999
+      name: motion
   type: LoadBalancer

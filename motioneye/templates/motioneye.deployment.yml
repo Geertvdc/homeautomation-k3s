@@ -23,6 +23,8 @@ spec:
         ports:
           - containerPort: 8765
             protocol: TCP
+          - containerPort: 7999
+            protocol: TCP
         volumeMounts:
           - name: motioneye-config
             mountPath: /etc/motioneye/
